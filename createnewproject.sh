@@ -57,16 +57,16 @@ git commit --amend --no-edit
 
 exit 0
 cd external
-rmdir fmt
+git rm fmt
 git submodule add --depth 1 -- https://github.com/fmtlib/fmt.git
-rmdir spdlog
+git rm spdlog
 git submodule add --depth 1 -- https://github.com/gabime/spdlog.git
-rmdir doctest
+git rm doctest
 git submodule add --depth 1 -- https://github.com/onqtam/doctest.git
 cd ..
 git submodule update --recursive
 
-
+exit 0
 
 mkdir build
 cd build
