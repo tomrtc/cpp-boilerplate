@@ -4,8 +4,8 @@
 
 #
 # Project specific options :
-#   - BoilerPlate_USE_DOXYGEN
-#   - BoilerPlate_BUILD_TESTS (requires BUILD_TESTING set to ON)
+#   - BOILERPLATE_USE_DOXYGEN
+#   - BOILERPLATE_BUILD_TESTS (requires BUILD_TESTING set to ON)
 # Other options might be available through the cmake scripts including (not exhaustive):
 #   - ENABLE_WARNINGS_SETTINGS
 #   - ENABLE_LTO
@@ -43,10 +43,10 @@ include(Coverage)
 # You should try to give as much control over the project setup to the user.
 # When modifying compile flags for example, if they are not mandatory, provide an option.
 
-option(BoilerPlate_USE_DOXYGEN "Add a doxygen target to generate the documentation" ON)
+option(BOILERPLATE_USE_DOXYGEN "Add a doxygen target to generate the documentation" ON)
 
 # Use your own option for tests, in case people use your library through add_subdirectory
-cmake_dependent_option(BoilerPlate_BUILD_TESTS
+cmake_dependent_option(BOILERPLATE_BUILD_TESTS
     "Enable BoilerPlate project tests targets" ON # By default we want tests if CTest is enabled
     "BUILD_TESTING" OFF # Stay coherent with CTest variables
 )
@@ -70,8 +70,8 @@ find_lto(CXX)
 #  BoilerPlate executable  #
 #==========================#
 
-set(BoilerPlate_SOURCE_FILES source/main.cpp )   # Always list the files explicitly
-set(BoilerPlate_INCLUDE_FILES )                  # In this case we don't have headers, but always list them so that they appear in the IDE
+set(BOILERPLATE_SOURCE_FILES source/main.cpp )   # Always list the files explicitly
+set(BOILERPLATE_INCLUDE_FILES )                  # In this case we don't have headers, but always list them so that they appear in the IDE
 
 add_executable(BoilerPlate ${BoilerPlate_SOURCE_FILES} ${BoilerPlate_INCLUDE_FILES})
 target_link_libraries(BoilerPlate
@@ -105,22 +105,22 @@ set(FOO_SOURCE_FILES source/foo.cpp )
 set(FOO_INCLUDE_FILES source/include/foo.h)
 
 add_library(bp_foo ${FOO_SOURCE_FILES} ${FOO_INCLUDE_FILES} )
-target_include_directories(bp_foo
+target_include_directories(BoilerPlate_foo
     PUBLIC # The folder must be used in the include path for any target using this library
         source/include
 )
-target_link_libraries(bp_foo
+target_link_libraries(BoilerPlate_foo
     PRIVATE # fmt is only needed to build, not to use this library
         fmt
 )
 # Give a 'scoped' name to libraries targets, as it can't be mistaken with system libraries
-add_library(bp::foo ALIAS bp_foo)
+add_library(BoilerPlate::foo ALIAS BoilerPlate_foo)
 
 #===========#
 #   Tests   #
 #===========#
 
-if(BP_BUILD_TESTS)
+if(BOILERPLATE_BUILD_TESTS)
     # Let the user add options to the test runner if needed
     set(TEST_RUNNER_PARAMS "--force-colors=true" CACHE STRING "Options to add to our test runners commands")
     # In a real project you most likely want to exclude test folders
@@ -139,7 +139,7 @@ endif()
 ## Doxygen ##
 #############
 
-if(BP_USE_DOXYGEN AND CMAKE_VERSION VERSION_GREATER_EQUAL 3.9)
+if(BOILERPLATE_USE_DOXYGEN AND CMAKE_VERSION VERSION_GREATER_EQUAL 3.9)
     find_package(Doxygen
         OPTIONAL_COMPONENTS dot mscgen dia
     )

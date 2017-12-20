@@ -10,6 +10,7 @@ fi
 template_directory=`pwd`
 new_directory=$1
 new_project=${new_directory##*/}
+NEW_PROJECT=${new_project^^}
 new_project_workspace=${new_directory%/*}
 git_user_name=`git config user.name`
 git_user_email=`git config user.email`
@@ -25,13 +26,14 @@ git fetch --depth=1 -n ${template_directory}/.git
 git reset --hard $(git commit-tree FETCH_HEAD^{tree} -m "${git_user_name} create project ${new_project}")
 
 # 1.1 rename project name
-sed -i "s/(BoilerPlate)/(${new_project})/" CMakeLists.txt
+sed -i "s/BoilerPlate/${new_project}/" CMakeLists.txt
+sed -i "s/BOILERPLATE/${NEW_PROJECT}/" CMakeLists.txt
 sed -i "s/(BoilerPlate)/(${new_project})/g" appveyor.yml
 
 # 1.1 register the new files
 git add CMakeLists.txt
 git add appveyor.yml
-exit 0
+
 # 2.1 remove unwanted template files.
 git rm createnewproject.sh
 git rm CreateBoilerPlate.bat
@@ -53,7 +55,7 @@ git add .gitignore
 # Fold these changes into the initial commit
 git commit --amend --no-edit
 
-
+exit 0
 cd external
 rmdir fmt
 git submodule add --depth 1 -- https://github.com/fmtlib/fmt.git
