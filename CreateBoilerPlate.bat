@@ -11,3 +11,4 @@ git submodule add --depth 1 -- https://github.com/gabime/spdlog.git
 rmdir doctest
 git submodule add --depth 1 -- https://github.com/onqtam/doctest.git
 cd ..
+git submodule update --recursive
