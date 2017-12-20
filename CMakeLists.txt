@@ -73,7 +73,7 @@ find_lto(CXX)
 set(BOILERPLATE_SOURCE_FILES source/main.cpp )   # Always list the files explicitly
 set(BOILERPLATE_INCLUDE_FILES )                  # In this case we don't have headers, but always list them so that they appear in the IDE
 
-add_executable(BoilerPlate ${BoilerPlate_SOURCE_FILES} ${BoilerPlate_INCLUDE_FILES})
+add_executable(BoilerPlate ${BOILERPLATE_SOURCE_FILES} ${BOILERPLATE_INCLUDE_FILES})
 target_link_libraries(BoilerPlate
     #PUBLIC # Useful for libraries, see https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html for more details about transitive usage requirements.
         #libraries/targets to link when linking this library
