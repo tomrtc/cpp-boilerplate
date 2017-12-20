@@ -55,19 +55,20 @@ git add .gitignore
 # Fold these changes into the initial commit
 git commit --amend --no-edit
 
-exit 0
+
 cd external
-git rm fmt
+
 git submodule add --depth 1 -- https://github.com/fmtlib/fmt.git
-git rm spdlog
+
 git submodule add --depth 1 -- https://github.com/gabime/spdlog.git
-git rm doctest
+
 git submodule add --depth 1 -- https://github.com/onqtam/doctest.git
 cd ..
 git submodule update --recursive
 
-exit 0
+
 
 mkdir build
 cd build
 cmake ..
+exit 0
