@@ -1,13 +1,11 @@
 #
-# Main CMakelists for the boilerplate project.
+# Main CMakelists for the BoilerPlate project.
 #
-# It aims to be a template and a CMake reference, and as such is documented as much as possible.
-# While everything might not fit in any project, it should give good defaults and avoid CMake antipatterns.
-# If you disagree with some pieces of advice given here, please discuss it with me by opening a Github Issue !
+
 #
 # Project specific options :
-#   - BP_USE_DOXYGEN
-#   - BP_BUILD_TESTS (requires BUILD_TESTING set to ON)
+#   - BoilerPlate_USE_DOXYGEN
+#   - BoilerPlate_BUILD_TESTS (requires BUILD_TESTING set to ON)
 # Other options might be available through the cmake scripts including (not exhaustive):
 #   - ENABLE_WARNINGS_SETTINGS
 #   - ENABLE_LTO
@@ -19,7 +17,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 endif()
 
 # Put the project early since modules might need to detect the compiler
-project("CPP-BoilerPlate" C CXX)
+project("BoilerPlate" C CXX)
 
 ############################
 ##  Modules and scripts   ##
@@ -45,11 +43,11 @@ include(Coverage)
 # You should try to give as much control over the project setup to the user.
 # When modifying compile flags for example, if they are not mandatory, provide an option.
 
-option(BP_USE_DOXYGEN "Add a doxygen target to generate the documentation" ON)
+option(BoilerPlate_USE_DOXYGEN "Add a doxygen target to generate the documentation" ON)
 
 # Use your own option for tests, in case people use your library through add_subdirectory
-cmake_dependent_option(BP_BUILD_TESTS
-    "Enable Boilerplate project tests targets" ON # By default we want tests if CTest is enabled
+cmake_dependent_option(BoilerPlate_BUILD_TESTS
+    "Enable BoilerPlate project tests targets" ON # By default we want tests if CTest is enabled
     "BUILD_TESTING" OFF # Stay coherent with CTest variables
 )
 
@@ -72,10 +70,10 @@ find_lto(CXX)
 #  BoilerPlate executable  #
 #==========================#
 
-set(BP_SOURCE_FILES source/main.cpp )   # Always list the files explicitly
-set(BP_INCLUDE_FILES )                  # In this case we don't have headers, but always list them so that they appear in the IDE
+set(BoilerPlate_SOURCE_FILES source/main.cpp )   # Always list the files explicitly
+set(BoilerPlate_INCLUDE_FILES )                  # In this case we don't have headers, but always list them so that they appear in the IDE
 
-add_executable(BoilerPlate ${BP_SOURCE_FILES} ${BP_INCLUDE_FILES})
+add_executable(BoilerPlate ${BoilerPlate_SOURCE_FILES} ${BoilerPlate_INCLUDE_FILES})
 target_link_libraries(BoilerPlate
     #PUBLIC # Useful for libraries, see https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html for more details about transitive usage requirements.
         #libraries/targets to link when linking this library
