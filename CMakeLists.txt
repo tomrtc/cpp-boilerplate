@@ -96,25 +96,7 @@ copy_dlls_for_debug(BoilerPlate "" "") # Copy dependencies next to the executabl
 # Setup our project as the startup project for Visual so that people don't need to do it manually
 set_directory_properties(PROPERTIES VS_STARTUP_PROJECT BoilerPlate)
 
-#===============#
-#  Foo library  #
-#===============#
 
-# Usually libraries are listed before executables, but in this case we only use it for the tests
-set(FOO_SOURCE_FILES source/foo.cpp )
-set(FOO_INCLUDE_FILES source/include/foo.h)
-
-add_library(bp_foo ${FOO_SOURCE_FILES} ${FOO_INCLUDE_FILES} )
-target_include_directories(BoilerPlate_foo
-    PUBLIC # The folder must be used in the include path for any target using this library
-        source/include
-)
-target_link_libraries(BoilerPlate_foo
-    PRIVATE # fmt is only needed to build, not to use this library
-        fmt
-)
-# Give a 'scoped' name to libraries targets, as it can't be mistaken with system libraries
-add_library(BoilerPlate::foo ALIAS BoilerPlate_foo)
 
 #===========#
 #   Tests   #

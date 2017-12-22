@@ -14,6 +14,7 @@ NEW_PROJECT=${new_project^^}
 new_project_workspace=${new_directory%/*}
 git_user_name=`git config user.name`
 git_user_email=`git config user.email`
+github_user="tomrtc"
 echo "Creating project ${new_project} from template ${template_directory}"
 echo "User: ${git_user_name}  under workspace ${new_project_workspace}."
 mkdir -p ${new_directory}
@@ -43,9 +44,9 @@ rm README.md
 echo '# TODO: Fill in this README' >> README.md
 echo '' >> README.md
 echo '### Status' >> README.md
-echo "[![Build Status](https://travis-ci.org/${USERNAME}/$1.svg?branch=master)](https
-://travis-ci.org/${USERNAME}/$1)" >> README.md
-echo "[![Build status](https://ci.appveyor.com/api/projects/status/PROJECT_ID?svg=true)](https://ci.appveyor.com/project/${USERNAME}/$1)" >> README.md
+echo "[![Build Status](https://travis-ci.org/${github_user}/$1.svg?branch=master)](https
+://travis-ci.org/${github_user}/$1)" >> README.md
+echo "[![Build status](https://ci.appveyor.com/api/projects/status/PROJECT_ID?svg=true)](https://ci.appveyor.com/project/${github_user}/$1)" >> README.md
 echo '' >> README.md
 echo 'This project is distributed under some license. See LICENSE for details.' >> README.md
 git add README.md
@@ -57,6 +58,7 @@ git commit --amend --no-edit
 
 
 cd external
+git submodule add --depth 1 -- https://github.com/catchorg/Clara
 
 git submodule add --depth 1 -- https://github.com/fmtlib/fmt.git
 

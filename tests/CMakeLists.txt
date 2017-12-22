@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.9)
 # Note : must be included by master CMakeLists.txt
 # Tests in static libraries might not get registered, see https://github.com/onqtam/doctest/blob/master/doc/markdown/faq.md#why-are-my-tests-in-a-static-library-not-getting-registered
 # For this reason, and because it is interesting to have individual
@@ -20,7 +20,7 @@ set_tests_properties(
 )
 
 add_executable(successtest successtest.cpp)
-target_link_libraries(successtest doctest bp::foo)
+target_link_libraries(successtest doctest)
 
 add_test(
     NAME BP.successtest
