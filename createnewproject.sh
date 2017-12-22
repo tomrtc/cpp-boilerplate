@@ -29,11 +29,11 @@ git reset --hard $(git commit-tree FETCH_HEAD^{tree} -m "${git_user_name} create
 # 1.1 rename project name
 sed -i "s/BoilerPlate/${new_project}/" CMakeLists.txt
 sed -i "s/BOILERPLATE/${NEW_PROJECT}/" CMakeLists.txt
-sed -i "s/(BoilerPlate)/(${new_project})/g" appveyor.yml
+
 
 # 1.1 register the new files
 git add CMakeLists.txt
-git add appveyor.yml
+
 
 # 2.1 remove unwanted template files.
 git rm createnewproject.sh
@@ -43,10 +43,7 @@ git rm CreateBoilerPlate.bat
 rm README.md
 echo '# TODO: Fill in this README' >> README.md
 echo '' >> README.md
-echo '### Status' >> README.md
-echo "[![Build Status](https://travis-ci.org/${github_user}/$1.svg?branch=master)](https
-://travis-ci.org/${github_user}/$1)" >> README.md
-echo "[![Build status](https://ci.appveyor.com/api/projects/status/PROJECT_ID?svg=true)](https://ci.appveyor.com/project/${github_user}/$1)" >> README.md
+
 echo '' >> README.md
 echo 'This project is distributed under some license. See LICENSE for details.' >> README.md
 git add README.md
