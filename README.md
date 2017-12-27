@@ -36,11 +36,29 @@ The CI providers used and that might need some setup :
 
  * Scripts lying in the cmake/ folder can be copy/pasted for use in any CMake project
  * Uses c++14
- * RunFixupBundle.cmake script : A small wrapper around fixup_bundle
+ * CopyDllsForDebug.cmake script : A small wrapper around fixup_bundle to copy DLLs to the output directory on windows
  * LTO.cmake script : Easier link time optimization configuration (should work on all CMake 3.x versions) as it used to be painful to setup.
  * Warnings.cmake script : A wrapper around common warning settings
  * Basic unit-testing using [doctest](https://github.com/onqtam/doctest)
  * Coverage.cmake : Test coverage script to add a 'Coverage' build type to CMake
+
+## FAQ
+
+__Q__: Why can't I link some new libraries I put inside the external folder ?
+
+__A__: By default targets are not at the GLOBAL scope, which means your CMakelists.txt might not see it.
+In this case you can either add an alias/imported library or use find_package/library as you would if the library was not in your buildtree.
+
+
+__Q__: Should I always put my dependencies in the folder external
+
+__A__: Absolutely not ! It is a great place for small libraries, but you probably don't want to have to rebuild big libs every time.
+For those, you can use a package manager such as [Hunter](https://github.com/ruslo/hunter) or simply rely on find_package/library.
+
+
+__Q__: I don't understand why you made the choice of XXXXXX here ?
+
+__A__: Open a new issue !
 
 ## External dependencies (using submodules)
 
